@@ -60,7 +60,7 @@ NSString *const kVVDUserHeaderDoc = @"com.onevcat.VVDocumenter.useHeaderDoc";
 -(NSInteger) spaceCount
 {
     NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:kVVDSpaceCount];
-    return (count <= 0) ? 2 : count;
+    return (count <= 0) ? 1 : count;
 }
 
 -(void) setSpaceCount:(NSInteger)spaceCount

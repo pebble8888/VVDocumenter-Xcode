@@ -75,7 +75,7 @@
 - (IBAction)btnResetPressed:(id)sender {
     [[VVDocumenterSetting defaultSetting] setUseSpaces:YES];
     [[VVDocumenterSetting defaultSetting] setTriggerString:VVDDefaultTriggerString];
-    [[VVDocumenterSetting defaultSetting] setSpaceCount:2];
+    [[VVDocumenterSetting defaultSetting] setSpaceCount:1];
     [[VVDocumenterSetting defaultSetting] setPrefixWithStar:YES];
     [[VVDocumenterSetting defaultSetting] setPrefixWithSlashes:NO];
     [[VVDocumenterSetting defaultSetting] setAddSinceToComments:NO];
