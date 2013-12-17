@@ -29,7 +29,7 @@
 
 -(NSString *) startComment
 {
-    return [NSString stringWithFormat:@"%@/**\n%@@brief <#Description#>\n", self.indent, self.prefixString];
+    return [NSString stringWithFormat:@"%@/**\n%@@brief \n", self.indent, self.prefixString];
 }
 
 -(NSString *) argumentsComment
@@ -43,9 +43,11 @@
     int longestNameLength = [[self.arguments valueForKeyPath:@"@max.name.length"] intValue];
     
     for (VVArgument *arg in self.arguments) {
-        NSString *paddedName = [arg.name stringByPaddingToLength:longestNameLength withString:@" " startingAtIndex:0];
+        NSString *paddedName = [arg.name stringByPaddingToLength:longestNameLength
+                                                      withString:@" "
+                                                 startingAtIndex:0];
         
-        [result appendFormat:@"%@@param %@ <#%@ description#>\n", self.prefixString, paddedName, arg.name];
+        [result appendFormat:@"%@@param (%@)%@ \n", self.prefixString, arg.type, paddedName];
     }
     return result;
 }
@@ -55,7 +57,7 @@
     if (!self.hasReturn) {
         return @"";
     } else {
-        return [NSString stringWithFormat:@"%@@return <#return value description#>\n", self.prefixString];
+        return [NSString stringWithFormat:@"%@@return \n", self.prefixString];
     }
 }
 
