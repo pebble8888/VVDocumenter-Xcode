@@ -13,9 +13,7 @@
 -(void)setType:(NSString *)type
 {
     if (type != _type) {
-       _type = [[[type vv_stringByReplacingRegexPattern:@"&$" withString:@""]
-                       vv_stringByReplacingRegexPattern:@"\\s*\\*$" withString:@""]
-                     stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+       _type = [type stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     }
 }
 

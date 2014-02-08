@@ -5,10 +5,14 @@
 //  Created by 王 巍 on 13-7-17.
 //  Copyright (c) 2013年 OneV's Den. All rights reserved.
 //
+/**
+ * @brief C function
+ */
 
 #import "VVBaseCommenter.h"
 #import "VVArgument.h"
 #import "VVDocumenterSetting.h"
+#import "Logger.h"
 
 @interface VVBaseCommenter()
 @property (nonatomic, copy) NSString *space;
@@ -133,8 +137,8 @@
             [tempArgs removeLastObject];
             arg.type = [tempArgs componentsJoinedByString:@" "];
             
-            VVLog(@"arg type: %@", arg.type);
-            VVLog(@"arg name: %@", arg.name);
+            DEBUG_LOG(@"arg type: %@", arg.type);
+            DEBUG_LOG(@"arg name: %@", arg.name);
             
             [self.arguments addObject:arg];
         }

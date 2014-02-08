@@ -13,6 +13,7 @@
 #import "VVKeyboardEventSender.h"
 #import "VVDSettingPanelWindowController.h"
 #import "VVDocumenterSetting.h"
+#import "Logger.h"
 
 @interface VVDocumenterManager()
 @property (nonatomic, strong) id eventMonitor;
@@ -22,7 +23,6 @@
 
 @implementation VVDocumenterManager
 +(void)pluginDidLoad:(NSBundle *)plugin {
-    VVLog(@"VVDocumenter: Plugin loaded successfully");
     [self shared];
 }
 
@@ -51,6 +51,7 @@
                                                  name:NSTextDidChangeNotification
                                                object:nil];
     [self addSettingMenu];
+    //[self setupLogger];
 }
 
 -(void) addSettingMenu
@@ -191,6 +192,13 @@
             }
         }
     }
+}
+
+- (void)setupLogger
+{
+    NSString *homeDir = NSHomeDirectoryForUser(NSUserName());
+    NSString *logPath = [homeDir stringByAppendingString: @"/vvdocumenter.log"];
+    [[Logger defaultLogger] setLogFile:logPath];
 }
 
 @end
