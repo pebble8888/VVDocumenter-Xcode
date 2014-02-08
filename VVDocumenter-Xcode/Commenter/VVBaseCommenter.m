@@ -34,7 +34,7 @@
 
 -(NSString *) startComment
 {
-    return [NSString stringWithFormat:@"%@/**\n%@@brief \n", self.indent, self.prefixString];
+    return [NSString stringWithFormat:@"/**\n%@@brief \n", self.prefixString];
 }
 
 -(NSString *) argumentsComment

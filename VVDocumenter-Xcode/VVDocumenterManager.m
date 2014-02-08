@@ -51,7 +51,7 @@
                                                  name:NSTextDidChangeNotification
                                                object:nil];
     [self addSettingMenu];
-    //[self setupLogger];
+    [self setupLogger];
 }
 
 -(void) addSettingMenu
@@ -171,7 +171,7 @@
                         [textView setSelectedRange:NSMakeRange(currentLineResult.range.location + baseIndentationLength, 0)];
                         
                         //Send a 'tab' after insert the doc. For our lazy programmers. :)
-                        [kes sendKeyCode:kVK_Tab];
+                        //[kes sendKeyCode:kVK_Tab];
                         [kes endKeyBoradEvents];
                         
                         shouldReplace = NO;
@@ -196,9 +196,11 @@
 
 - (void)setupLogger
 {
+#if 0
     NSString *homeDir = NSHomeDirectoryForUser(NSUserName());
     NSString *logPath = [homeDir stringByAppendingString: @"/vvdocumenter.log"];
     [[Logger defaultLogger] setLogFile:logPath];
+#endif
 }
 
 @end
