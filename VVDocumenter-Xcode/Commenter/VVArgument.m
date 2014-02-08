@@ -20,7 +20,8 @@
 -(void)setName:(NSString *)name
 {
     if (name != _name) {
-        _name = [[[[[[name  vv_stringByReplacingRegexPattern:@"^&" withString:@""]
+        _name = [[[[[[[name vv_stringByReplacingRegexPattern:@"\\(|\\)" withString:@""]
+                            vv_stringByReplacingRegexPattern:@"^&" withString:@""]
                             vv_stringByReplacingRegexPattern:@"^\\*+" withString:@""]
                             vv_stringByReplacingRegexPattern:@"\\[.*$" withString:@""]
                             vv_stringByReplacingRegexPattern:@",$" withString:@""]
