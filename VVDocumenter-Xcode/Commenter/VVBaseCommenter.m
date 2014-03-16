@@ -46,7 +46,7 @@
     NSMutableString *result = [NSMutableString stringWithFormat:@""];
     
     int longestNameLength = [[self.arguments valueForKeyPath:@"@max.name.length"] intValue];
-    
+
     for (VVArgument *arg in self.arguments) {
         NSString *paddedName = [arg.name stringByPaddingToLength:longestNameLength
                                                       withString:@" "
@@ -104,7 +104,11 @@
 
 -(NSString *) emptyLine
 {
-    return [[NSString stringWithFormat:@"%@\n", self.prefixString] vv_stringByTrimEndSpaces];
+    if ([[VVDocumenterSetting defaultSetting] blankLinesBetweenSections]) {
+        return [[NSString stringWithFormat:@"%@\n", self.prefixString] vv_stringByTrimEndSpaces];
+    } else {
+        return @"";
+    }
 }
 
 -(NSString *) prefixString
@@ -124,7 +128,7 @@
     if (rawArgsCode.length == 0) {
         return;
     }
-    
+
     NSArray *argumentStrings = [rawArgsCode componentsSeparatedByString:@","];
     for (__strong NSString *argumentString in argumentStrings) {
         VVArgument *arg = [[VVArgument alloc] init];
@@ -135,9 +139,9 @@
         while ([[tempArgs lastObject] isEqualToString:@" "]) {
             [tempArgs removeLastObject];
         }
-        
+
         arg.name = [tempArgs lastObject];
-        
+
         [tempArgs removeLastObject];
         arg.type = [tempArgs componentsJoinedByString:@" "];
         
