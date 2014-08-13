@@ -134,7 +134,6 @@
     
     // searchRange will be updated to new range later, for search the next open/close token.
     NSRange searchRange = range;
-    VVLog(@"Begin Search Range: %lu, %lu", (unsigned long)searchRange.location, (unsigned long)searchRange.length);
     
     NSInteger openCount = 0;
     NSInteger closeCount = 0;
@@ -153,7 +152,6 @@
     
     // Update the search range: from current token to the end.
     searchRange = NSMakeRange(nextOpenRange.location + 1, self.length - nextOpenRange.location - 1);
-    VVLog(@"Update Search Range: %lu, %lu", (unsigned long)searchRange.location, (unsigned long)searchRange.length);
     
     // Try to find the scope by pairing open and close count
     NSRange targetRange = NSMakeRange(0,0);
@@ -175,11 +173,8 @@
             closeCount++;
         }
         
-        VVLog(@"Open:%ld, Close:%ld",(long)openCount,(long)closeCount);
         // Update the search range: from current token to the end.
         searchRange = NSMakeRange(targetRange.location + 1, self.length - targetRange.location - 1);
-        VVLog(@"Target Range: %lu, %lu",targetRange.location,targetRange.length);
-        VVLog(@"Update Search Range: %lu, %lu", (unsigned long)searchRange.location, (unsigned long)searchRange.length);
     }
     
     NSRange resultRange;

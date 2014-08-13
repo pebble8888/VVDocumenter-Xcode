@@ -188,6 +188,7 @@
         
         [self.arguments addObject:arg];
     }
+}
 
 -(BOOL) shouldComment
 {

@@ -67,8 +67,6 @@
             arg.name = [firstPart vv_stringByReplacingRegexPattern:@"#" withString:@""];
         }
         
-        VVLog(@"arg name: %@", arg.name);
-        
         [self.arguments addObject:arg];
     }
 }
