@@ -22,13 +22,15 @@
 @property (weak) IBOutlet NSButtonCell *btnPrefixWithStar;
 @property (weak) IBOutlet NSButtonCell *btnPrefixWithSlashes;
 @property (assign) IBOutlet NSButton *btnAddSinceToComment;
+@property (weak) IBOutlet NSButton *btnBriefDescription;
 @property (weak) IBOutlet NSButton *btnUseHeaderDoc;
 @property (weak) IBOutlet NSButton *btnBlankLinesBetweenSections;
+@property (weak) IBOutlet NSButton *btnAlightArgumentComments;
 @end
 
 @implementation VVDSettingPanelWindowController
 
-- (id)initWithWindow:(NSWindow *)window
+- (instancetype)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
@@ -47,8 +49,10 @@
     self.btnUseSpaces.state = (NSCellStateValue)[[VVDocumenterSetting defaultSetting] useSpaces];
 
     self.btnAddSinceToComment.state = (NSCellStateValue)[[VVDocumenterSetting defaultSetting] addSinceToComments];
+    self.btnBriefDescription.state = (NSCellStateValue)[[VVDocumenterSetting defaultSetting] briefDescription];
     self.btnUseHeaderDoc.state = (NSCellStateValue)[[VVDocumenterSetting defaultSetting] useHeaderDoc];
     self.btnBlankLinesBetweenSections.state = (NSCellStateValue)[[VVDocumenterSetting defaultSetting] blankLinesBetweenSections];
+    self.btnAlightArgumentComments.state = (NSCellStateValue)[[VVDocumenterSetting defaultSetting] alignArgumentComments];
 
     if ([[VVDocumenterSetting defaultSetting] prefixWithStar]) {
         [self.mtxPrefixOptions selectCell:self.btnPrefixWithStar];
@@ -81,8 +85,10 @@
     [[VVDocumenterSetting defaultSetting] setPrefixWithStar:YES];
     [[VVDocumenterSetting defaultSetting] setPrefixWithSlashes:NO];
     [[VVDocumenterSetting defaultSetting] setAddSinceToComments:NO];
+    [[VVDocumenterSetting defaultSetting] setBriefDescription:NO];
     [[VVDocumenterSetting defaultSetting] setUseHeaderDoc:NO];
     [[VVDocumenterSetting defaultSetting] setBlankLinesBetweenSections:YES];
+    [[VVDocumenterSetting defaultSetting] setAlignArgumentComments:YES];
 
     self.btnUseSpaces.state = NSOnState;
     [self updateUseSpace:self.btnUseSpaces.state];
@@ -90,9 +96,11 @@
     self.btnPrefixWithStar.state = NSOnState;
     self.btnPrefixWithSlashes.state = NSOffState;
     self.btnAddSinceToComment.state = NSOffState;
+    self.btnBriefDescription.state = NSOffState;
     [self.tfTrigger setStringValue:VVDDefaultTriggerString];
     self.btnUseHeaderDoc.state = NSOffState;
     self.btnBlankLinesBetweenSections.state = NSOnState;
+    self.btnAlightArgumentComments.state = NSOnState;
 
     self.btnPrefixWithSlashes.enabled = YES;
 
@@ -114,6 +122,10 @@
 
 - (IBAction)btnAddSinceToCommentsPressed:(id)sender {
     [[VVDocumenterSetting defaultSetting] setAddSinceToComments:self.btnAddSinceToComment.state];
+}
+
+- (IBAction)btnBriefDescriptionPressed:(id)sender {
+    [[VVDocumenterSetting defaultSetting] setBriefDescription:self.btnBriefDescription.state];
 }
 
 -(void) syncSpaceCount
@@ -146,6 +158,7 @@
     }
     return YES;
 }
+
 - (IBAction)useHeaderDoc:(id)sender {
     [[VVDocumenterSetting defaultSetting] setUseHeaderDoc:self.btnUseHeaderDoc.state];
 
@@ -166,4 +179,9 @@
 - (IBAction)blankLinesBetweenSections:(id)sender {
     [[VVDocumenterSetting defaultSetting] setBlankLinesBetweenSections:self.btnBlankLinesBetweenSections.state];
 }
+
+- (IBAction)alignArgumentComments:(id)sender {
+    [[VVDocumenterSetting defaultSetting] setAlignArgumentComments:self.btnAlightArgumentComments.state];
+}
+
 @end

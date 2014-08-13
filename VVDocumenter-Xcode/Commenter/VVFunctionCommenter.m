@@ -22,7 +22,7 @@
 
 -(void) captureParameters
 {
-    NSArray * braceGroups = [self.code vv_stringsByExtractingGroupsUsingRegexPattern:@"\\(([^\\^].*)\\)"];
+    NSArray * braceGroups = [self.code vv_stringsByExtractingGroupsUsingRegexPattern:@"\\(([^\\^].*?)\\)(?:__attribute__\\(\\(.*\\)\\))?"];
     if (braceGroups.count > 0) {
         [self parseArgumentsInputArgs:braceGroups[0]];
     }
@@ -41,7 +41,7 @@
     [self captureReturnType];
     [self captureParameters];
     
-    return [super document];
+    return [super documentForC];
 }
 
 @end
