@@ -9,11 +9,11 @@
 #import "NSString+VVSyntax.h"
 
 @implementation NSString (VVSyntax)
-
 -(NSString *) vv_stringByConvertingToUniform
 {
-    return [[self vv_stringByReplacingRegexPattern:@"\\s*(\\(.*\?\\))\\s*" withString:@"$1"]
-                  vv_stringByReplacingRegexPattern:@"\\s*\n\\s*"           withString:@" "];
+    return [[[self vv_stringByReplacingRegexPattern:@"\\s*\\("    withString:@"("]
+                   vv_stringByReplacingRegexPattern:@"\\)\\s*"    withString:@")"]
+                   vv_stringByReplacingRegexPattern:@"\\s*\n\\s*" withString:@" "];
 }
 
 -(NSString *) vv_stringByTrimEndSpaces
@@ -71,7 +71,7 @@
 
 -(BOOL) vv_isSwiftFunction
 {
-    return ![self vv_isObjCMethod] && ![self vv_isSwiftProperty] && [self vv_matchesPatternRegexPattern:@"^\\s*(.*\\s+)?(func\\s+)|(init|deinit)"];
+    return ![self vv_isObjCMethod] && ![self vv_isSwiftProperty] && [self vv_matchesPatternRegexPattern:@"^\\s*(.*\\s+)?(func\\s+)|(init|deinit|subscript)"];
 }
 
 -(BOOL) vv_isSwiftEnum
@@ -81,7 +81,9 @@
 
 -(BOOL) vv_isSwiftProperty
 {
-    return [self vv_matchesPatternRegexPattern:@"^\\s*(.*?)(\\s*let|var\\s*)\\s+"];
+    // `let`/`var` can be in swift func, but `(` appear before `let`/`var` only
+    // happens when `private(set)` or `internal(set)` is used
+    return [self vv_matchesPatternRegexPattern:@"^\\s*([^(]*?)(((\\s*let|var\\s*)\\s+)|(\\(\\s*set\\s*\\)))"];
 }
 
 @end

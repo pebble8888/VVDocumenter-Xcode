@@ -21,7 +21,7 @@
         self.hasReturn = NO;
     } else if ([funcSignatureWithoutParams vv_matchesPatternRegexPattern:@"s*->\\s*"]) {
         self.hasReturn = YES;
-    } else if ([funcSignatureWithoutParams vv_matchesPatternRegexPattern:@"^\\s*(.*\\s+)?init\\s*"]) {
+    } else if ([funcSignatureWithoutParams vv_matchesPatternRegexPattern:@"^\\s*(.*\\s+)?(init|subscript)\\s*"]) {
         self.hasReturn = YES;
     } else {
         self.hasReturn = NO;
@@ -30,7 +30,8 @@
 
 -(void) captureParameters
 {
-    NSArray * braceGroups = [self.code vv_stringsByExtractingGroupsUsingRegexPattern:@"\\((.*)\\)"];
+    VVTextResult *funcParenthesesResult = [self.code vv_textResultMatchPartWithPairOpenString:@"(" closeString:@")" currentLocation:0];
+    NSArray * braceGroups = [funcParenthesesResult.string vv_stringsByExtractingGroupsUsingRegexPattern:@"\\((.*)\\)"];
     if (braceGroups.count > 0) {
         NSString *content = braceGroups[0];
         NSString *trimmed = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

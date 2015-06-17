@@ -30,7 +30,8 @@ static NSArray *_typeStrings;
 {
     NSArray *methods = @[@"+ (ADTransition *)nullTransition;",
                          @"   -    (BOOL) application: (UIApplication *) application  \n didFinishLaunchingWithOptions: (NSDictionary *) launchOptions;",
-                         @"- (id)initWithDuration:(CFTimeInterval)duration sourceRect:(CGRect)sourceRect {"];
+                         @"- (id)initWithDuration:(CFTimeInterval)duration sourceRect:(CGRect)sourceRect {",
+                         @"-(void)whenLinked:(void (^)(void))actionHandler;"];
     
     NSArray *functions = @[@"void dosomething ( int x, int  y );",
                            @"int main(int argc, char *argv[]) \n {",
@@ -68,7 +69,10 @@ static NSArray *_typeStrings;
 
     NSArray *swiftFunctions = @[@"func sayHello(personName: String) -> String  {",
                                 @"func halfOpenRangeLength(start: Int, end: Int) -> Int\n  {",
-                                @"func sayHelloWorld() ->String"];
+                                @"func sayHelloWorld() ->String",
+                                @"func testParamsType(var a: Int) {",
+                                @"init(style: Style, gearing: Gearing, handlebar: Handlebar, frameSize centimeters: Int) {",
+                                @"public subscript(key: KeyType)-> ValueType? {"];
     
     /*
     //Now there is no difference between Objective-C (C) struct and Swift struct. Ignore this.
@@ -93,7 +97,8 @@ static NSArray *_typeStrings;
 {
     NSArray *methods = @[@"+(ADTransition *)nullTransition;",
                          @"   -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;",
-                         @"-(id)initWithDuration:(CFTimeInterval)duration sourceRect:(CGRect)sourceRect {"];
+                         @"-(id)initWithDuration:(CFTimeInterval)duration sourceRect:(CGRect)sourceRect {",
+                         @"-(void)whenLinked:(void(^)(void))actionHandler;"];
     
     NSArray *functions = @[@"void dosomething( int x, int  y );",
                            @"int main(int argc, char *argv[]){",
@@ -106,7 +111,7 @@ static NSArray *_typeStrings;
 
     NSArray *macros = @[@"#define MAX(A,B)({",
                         @"#define MIN(A,B)((A)<(B)?(A):(B))",
-                        @"#define ABS(A)((A)< 0 ?(-(A)) :(A))"];
+                        @"#define ABS(A)((A)< 0 ?(-(A)):(A))"];
 
     NSArray *structs = @[@"struct Foo {",
                          @"   struct node {",
@@ -132,7 +137,9 @@ static NSArray *_typeStrings;
     NSArray *swiftFunctions = @[@"func sayHello(personName: String)-> String  {",
                                 @"func halfOpenRangeLength(start: Int, end: Int)-> Int {",
                                 @"func sayHelloWorld()->String",
-                                @"init(style: Style, gearing: Gearing, handlebar: Handlebar, frameSize centimeters: Int) {"];
+                                @"func testParamsType(var a: Int){",
+                                @"init(style: Style, gearing: Gearing, handlebar: Handlebar, frameSize centimeters: Int){",
+                                @"public subscript(key: KeyType)-> ValueType? {"];
     
     /*
      //Now there is no difference between Objective-C (C) struct and Swift struct. Ignore this.
